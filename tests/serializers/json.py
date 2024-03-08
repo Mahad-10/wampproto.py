@@ -1,5 +1,5 @@
-from wamp.messages.hello import Hello
-from wamp.serializers.json import JSONSerializer
+from wamp.messages import Hello
+from wamp.serializers import JSONSerializer
 
 
 def test_serializer():

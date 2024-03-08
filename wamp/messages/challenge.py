@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from wamp.messages import error, util
-from wamp.messages.message import Message
+from wamp.messages import error, util, Message
 
 
 class Challenge(Message):

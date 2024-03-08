@@ -1,7 +1,6 @@
 import pytest
 
-from wamp.messages import error
-from wamp.messages.challenge import Challenge
+from wamp.messages import error, Challenge
 
 
 def test_parse_with_invalid_type():

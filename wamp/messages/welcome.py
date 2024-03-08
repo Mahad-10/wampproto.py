@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from wamp.messages import error, util
-from wamp.messages.message import Message
+from wamp.messages import error, util, Message
 
 
 class Welcome(Message):

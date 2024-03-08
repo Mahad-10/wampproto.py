@@ -1,5 +1,5 @@
-from wamp.messages.hello import Hello
-from wamp.serializers.cbor import CBORSerializer
+from wamp.messages import Hello
+from wamp.serializers import CBORSerializer
 
 
 def test_serializer():

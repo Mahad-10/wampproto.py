@@ -1,7 +1,6 @@
 import pytest
 
-from wamp.messages import error, util
-from wamp.messages.welcome import Welcome
+from wamp.messages import error, util, Welcome
 
 TEST_SESSION_ID = 25631
 
