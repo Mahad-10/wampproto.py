@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from wamp.messages import error, util, Message
+from wamp.messages import util, Message, ProtocolError
 
 
 class Abort(Message):
@@ -17,7 +17,7 @@ class Abort(Message):
         util.validate_message_or_raise(msg, Abort.ABORT_TEXT)
 
         if msg[0] != Abort.MESSAGE_TYPE:
-            raise error.ProtocolError(f"invalid message type for {Abort.ABORT_TEXT}")
+            raise ProtocolError(f"invalid message type for {Abort.ABORT_TEXT}")
 
         details = util.validate_details_or_raise(msg[1], Abort.ABORT_TEXT)
 

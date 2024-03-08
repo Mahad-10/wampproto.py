@@ -5,5 +5,5 @@ from wamp.messages.goodbye import Goodbye
 from wamp.messages.welcome import Welcome
 from wamp.messages.challenge import Challenge
 from wamp.messages.authenticate import Authenticate
-
-__all__ = ["Message", "Hello", "Welcome", "Abort", "Challenge", "Authenticate", "Goodbye"]
+from wamp.messages.error import ProtocolError, InvalidUriError, InvalidRealmError, InvalidDetailsError
+__all__ = ["Message", "Hello", "Welcome", "Abort", "Challenge", "Authenticate", "Goodbye", "ProtocolError", "InvalidUriError", "InvalidRealmError", "InvalidDetailsError"]

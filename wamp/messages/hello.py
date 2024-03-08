@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from wamp.messages import error, util, Message
+from wamp.messages import util, Message, ProtocolError
 
 
 class Hello(Message):
@@ -25,41 +25,41 @@ class Hello(Message):
     @staticmethod
     def parse(msg: list) -> Hello:
         if not isinstance(msg, list):
-            raise error.ProtocolError(
+            raise ProtocolError(
                 f"invalid message type '{type(msg)}' for {Hello.HELLO_TEXT}, type should be a list"
             )
 
         if len(msg) != 3:
-            raise error.ProtocolError(
+            raise ProtocolError(
                 f"invalid message length '{len(msg)}' for {Hello.HELLO_TEXT}, length should be equal to three"
             )
 
         if msg[0] != Hello.MESSAGE_TYPE:
-            raise error.ProtocolError(f"invalid message type for {Hello.HELLO_TEXT}")
+            raise ProtocolError(f"invalid message type for {Hello.HELLO_TEXT}")
 
         realm = util.validate_realm_or_raise(msg[1], Hello.HELLO_TEXT)
         details = util.validate_details_or_raise(msg[2], Hello.HELLO_TEXT)
 
         roles = details.get("roles", {})
         if not isinstance(roles, dict):
-            raise error.ProtocolError(f"invalid type for 'roles' in details for {Hello.HELLO_TEXT}")
+            raise ProtocolError(f"invalid type for 'roles' in details for {Hello.HELLO_TEXT}")
 
         if len(roles) == 0:
-            raise error.ProtocolError(f"roles are missing in details for {Hello.HELLO_TEXT}")
+            raise ProtocolError(f"roles are missing in details for {Hello.HELLO_TEXT}")
 
         for role in roles.keys():
             if role not in util.AllowedRoles.__members__.values():
-                raise error.ProtocolError(f"invalid role '{role}' in 'roles' details for {Hello.HELLO_TEXT}")
+                raise ProtocolError(f"invalid role '{role}' in 'roles' details for {Hello.HELLO_TEXT}")
 
         authid = details.get("authid", None)
         if authid is not None:
             if not isinstance(authid, str):
-                raise error.ProtocolError(f"authid must be a type string for {Hello.HELLO_TEXT}")
+                raise ProtocolError(f"authid must be a type string for {Hello.HELLO_TEXT}")
 
         authrole = details.get("authrole", None)
         if authrole is not None:
             if not isinstance(authrole, str):
-                raise error.ProtocolError(f"authrole must be a type string for {Hello.HELLO_TEXT}")
+                raise ProtocolError(f"authrole must be a type string for {Hello.HELLO_TEXT}")
 
         return Hello(realm=realm, roles=roles, authid=authid, authrole=authrole)
 
